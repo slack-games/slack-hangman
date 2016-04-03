@@ -3,12 +3,14 @@
 
 Turn based slack hangman game.
 
+![Hangman](draw/hangman.png)
+
 ## Commands
 
 Slack commands examples:
 
 - ___/hng start___ - start a new game
-- ___/hng guess [a-z] - make a guess
+- ___/hng guess [a-z]___ - make a guess
 - ___/hng current___ - show the current game state
 - ___/hng stats___ - show user stats, wins, losses etc [not implemented]
 - ___/hng help___ - show user command help and how to play [not implemented]
