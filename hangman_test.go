@@ -33,29 +33,20 @@ func TestHangman(t *testing.T) {
 	}
 }
 
-func TestAfterManyWrongGuessesGameover(t *testing.T) {
+func TestGameOverWhenTooManySteps(t *testing.T) {
 	game := Hangman{
-		Word:    "deployment",
-		Guess:   "",
-		Current: "_e_lo_men_",
+		Word: "corridor",
+		// One correct guess, four wrong
+		Guess:   "astou",
+		Current: "_o____or",
 		State:   TurnState,
 	}
-	game.MakeGuess('a')
-	game.MakeGuess('w')
-	game.MakeGuess('c')
-	game.MakeGuess('g')
-	game.MakeGuess('r')
-	game.MakeGuess('q')
-	game.MakeGuess('f')
 
+	// Last guess and game should be over
+	game.MakeGuess('m')
 	if game.State != GameOverState {
-		t.Error("Game should be over after many wrong attempts state =", game.State)
+		t.Errorf("The guesses exceeds the steps=%s state=%s", game.Guess, game.State)
 	}
-	if game.Guess != "awcgr" {
-		t.Error("The guess list should be same as awcgrq =", game.Guess)
-	}
-
-	game.MakeGuess('d')
 }
 
 func TestGuessWontAllowDuplicates(t *testing.T) {

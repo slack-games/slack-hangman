@@ -48,8 +48,8 @@ func DrawWrongGuesses(gc *draw2dimg.GraphicContext, guess, word string) {
 			gc.SetFillColor(RedColor)
 		}
 		gc.SetFontSize(16)
-		xOffset := index % 2 * 30
-		yOffset := index * 30
+		xOffset := index % 2 * 35
+		yOffset := index * 20
 		gc.FillStringAt(fmt.Sprintf("%c", char), float64(240+xOffset), float64(80+yOffset))
 	}
 	gc.Restore()
@@ -57,7 +57,7 @@ func DrawWrongGuesses(gc *draw2dimg.GraphicContext, guess, word string) {
 
 func DrawHangmanFrame(gc *draw2dimg.GraphicContext, imagePath string, wrongGuess []rune) {
 	guesses := len(wrongGuess)
-	if guesses > hangman.STEPS {
+	if guesses > hangman.Steps {
 		log.Println("Too many guesses")
 		return
 	}
@@ -137,7 +137,7 @@ func Draw(game *hangman.Hangman) image.Image {
 	gc.Save()
 	gc.SetFillColor(color.Black)
 	gc.SetFontSize(25)
-	gc.FillStringAt(game.Current, 30, 320)
+	gc.FillStringAt(fmt.Sprintf("%s [%d]", game.Current, len(game.Current)), 30, 320)
 	gc.Restore()
 
 	return dest

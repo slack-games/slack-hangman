@@ -9,10 +9,10 @@ import (
 
 func TestDrawGame(t *testing.T) {
 	game := &hangman.Hangman{
-		Word:    "deployment",
-		Guess:   "frmty",
-		Current: "_e_lo_men_",
-		State:   hangman.GameOverState,
+		Word:    "excited",
+		Guess:   "uaoieptm",
+		Current: "ex_ite_",
+		State:   hangman.TurnState,
 	}
 
 	image := Draw(game)

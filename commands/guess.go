@@ -60,7 +60,7 @@ func GuessCommand(db *sqlx.DB, userID string, char rune) slack.ResponseMessage {
 	}
 
 	return slack.ResponseMessage{
-		fmt.Sprintf("You guessed char %x", char),
+		fmt.Sprintf("You guessed char %c", char),
 		// fmt.Sprintf("You made move to [%d], opponent made next move to [%d], state %s", spot, freeSpot, newState.Mode),
 		[]slack.Attachment{
 			slack.Attachment{

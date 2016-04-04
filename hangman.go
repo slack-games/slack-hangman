@@ -7,8 +7,8 @@ import (
 )
 
 const (
-	STEPS       = 5
-	MAX_VISIBLE = 3
+	Steps      = 5
+	MaxVisible = 3
 )
 
 const (
@@ -67,7 +67,7 @@ func (h *Hangman) checkGameState() State {
 		state = WinState
 	}
 
-	if len(h.GetWrongGuesses()) >= STEPS {
+	if len(h.GetWrongGuesses()) >= Steps {
 		state = GameOverState
 	}
 	return state
@@ -75,7 +75,7 @@ func (h *Hangman) checkGameState() State {
 
 func (h *Hangman) RandomizeWord() string {
 	rand.Seed(int64(time.Now().Nanosecond()))
-	numVisible := rand.Intn(MAX_VISIBLE-1) + 1
+	numVisible := rand.Intn(MaxVisible-1) + 1
 	newWord := ""
 
 	// Create a new string with same size and hidden chars
@@ -103,7 +103,9 @@ func (h *Hangman) MakeGuess(char rune) string {
 
 	// if the char does not exist add into guess list
 	if !strings.ContainsRune(h.Word, char) {
+		// Call order matters here due to the h.Guess changes
 		h.Guess = h.Guess + string(char)
+		h.State = h.checkGameState()
 		return h.Current
 	}
 
