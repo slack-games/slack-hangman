@@ -133,6 +133,14 @@ func Draw(game *hangman.Hangman) image.Image {
 
 	DrawWrongGuesses(gc, game.Guess, game.Word)
 
+	if game.State == hangman.GameOverState {
+		gc.Save()
+		gc.SetFillColor(GreenColor)
+		gc.SetFontSize(25)
+		gc.FillStringAt(fmt.Sprintf("%s", game.Word), 30, 320)
+		gc.Restore()
+	}
+
 	// Show the current word
 	gc.Save()
 	gc.SetFillColor(color.Black)
