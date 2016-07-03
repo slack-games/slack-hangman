@@ -7,9 +7,9 @@ import (
 	"time"
 
 	"github.com/jmoiron/sqlx"
-	"github.com/riston/slack-client"
-	"github.com/riston/slack-hangman"
-	hngdatastore "github.com/riston/slack-hangman/datastore"
+	slack "github.com/slack-games/slack-client"
+	"github.com/slack-games/slack-hangman"
+	hngdatastore "github.com/slack-games/slack-hangman/datastore"
 )
 
 func GuessCommand(db *sqlx.DB, userID string, char rune) slack.ResponseMessage {
@@ -26,7 +26,7 @@ func GuessCommand(db *sqlx.DB, userID string, char rune) slack.ResponseMessage {
 	}
 
 	// Check the game states
-	if isGameOver(state) {
+	if state.Mode == "GameOver" {
 		log.Println("Game is already over")
 		return slack.ResponseMessage{
 			Text:        "Current game is over, but you can always start a new game `/game start`",
@@ -60,13 +60,15 @@ func GuessCommand(db *sqlx.DB, userID string, char rune) slack.ResponseMessage {
 	}
 
 	return slack.ResponseMessage{
-		fmt.Sprintf("You guessed char %c", char),
+		Text: fmt.Sprintf("Your guess: %c", char),
 		// fmt.Sprintf("You made move to [%d], opponent made next move to [%d], state %s", spot, freeSpot, newState.Mode),
-		[]slack.Attachment{
+		Attachments: []slack.Attachment{
 			slack.Attachment{
-				"The current game state", "", "",
-				fmt.Sprintf("https://gametestslack.localtunnel.me/game/hangman/image/%s", stateID),
-				"#764FA5",
+				Title:    "The current game state",
+				Text:     "",
+				Fallback: "",
+				ImageURL: fmt.Sprintf("https://gametestslack.localtunnel.me/game/hangman/image/%s", stateID),
+				Color:    "#764FA5",
 			},
 		},
 	}

@@ -10,7 +10,7 @@ import (
 
 	"github.com/llgcode/draw2d"
 	"github.com/llgcode/draw2d/draw2dimg"
-	"github.com/riston/slack-hangman"
+	"github.com/slack-games/slack-hangman"
 )
 
 const (
@@ -74,6 +74,23 @@ func DrawHangmanFrame(gc *draw2dimg.GraphicContext, imagePath string, wrongGuess
 	gc.Restore()
 }
 
+func DrawUserLives(gc *draw2dimg.GraphicContext, imagePath string, lives int) {
+	file := fmt.Sprintf("%s/heart.png", imagePath)
+	source, err := draw2dimg.LoadFromPngFile(file)
+	if err != nil {
+		log.Println("Could not load the heart file")
+	}
+
+	gc.Save()
+	gc.Translate(15, 10)
+	for index := 0; index < lives; index++ {
+		gc.DrawImage(source)
+		gc.Translate(20, 0)
+	}
+	gc.Restore()
+
+}
+
 func DrawState(gc *draw2dimg.GraphicContext, state hangman.State) {
 	var fontColor color.RGBA
 	var message string
@@ -117,12 +134,13 @@ func Draw(game *hangman.Hangman) image.Image {
 
 	gc.SetFontData(draw2d.FontData{
 		Name:   "luxi",
-		Family: draw2d.FontFamilySans,
-		Style:  draw2d.FontStyleNormal,
+		Family: draw2d.FontFamilyMono,
+		Style:  draw2d.FontStyleBold,
 	})
 
 	wrongGuesses := game.GetWrongGuesses()
 
+	DrawUserLives(gc, imagePath, hangman.Steps-len(wrongGuesses))
 	DrawHangmanFrame(gc, imagePath, wrongGuesses)
 	DrawState(gc, game.State)
 

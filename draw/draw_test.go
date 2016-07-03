@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/llgcode/draw2d/draw2dimg"
-	"github.com/riston/slack-hangman"
+	"github.com/slack-games/slack-hangman"
 )
 
 func TestDrawGame(t *testing.T) {
@@ -12,7 +12,7 @@ func TestDrawGame(t *testing.T) {
 		Word:    "excited",
 		Guess:   "uaoieptm",
 		Current: "ex_ite_",
-		State:   hangman.TurnState,
+		State:   hangman.GameOverState,
 	}
 
 	image := Draw(game)

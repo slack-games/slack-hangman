@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/jmoiron/sqlx"
+	"github.com/slack-games/slack-hangman"
 )
 
 // TODO: Move words list into some DB, or use some compressed form
@@ -20,6 +21,11 @@ type State struct {
 	UserID   string    `db:"user_id"`
 	ParentID string    `db:"parent_state_id"`
 	Created  time.Time `db:"created_at"`
+}
+
+func (s *State) isGameOver() bool {
+	return s.Mode == fmt.Sprintf("%s", hangman.GameOverState) ||
+		s.Mode == fmt.Sprintf("%s", hangman.WinState)
 }
 
 func (s State) String() string {

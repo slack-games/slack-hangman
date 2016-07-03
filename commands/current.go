@@ -5,8 +5,8 @@ import (
 	"log"
 
 	"github.com/jmoiron/sqlx"
-	"github.com/riston/slack-client"
-	"github.com/riston/slack-hangman/datastore"
+	"github.com/slack-games/slack-client"
+	"github.com/slack-games/slack-hangman/datastore"
 )
 
 // CurrentCommand show the current user game state

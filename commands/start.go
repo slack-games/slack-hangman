@@ -6,9 +6,9 @@ import (
 	"log"
 
 	"github.com/jmoiron/sqlx"
-	"github.com/riston/slack-client"
-	hangman "github.com/riston/slack-hangman"
-	datastore "github.com/riston/slack-hangman/datastore"
+	"github.com/slack-games/slack-client"
+	hangman "github.com/slack-games/slack-hangman"
+	datastore "github.com/slack-games/slack-hangman/datastore"
 )
 
 func StartCommand(db *sqlx.DB, userID string) slack.ResponseMessage {

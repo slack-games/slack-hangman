@@ -5,9 +5,9 @@ import (
 	"image"
 
 	"github.com/jmoiron/sqlx"
-	"github.com/riston/slack-hangman"
-	hngdatastore "github.com/riston/slack-hangman/datastore"
-	drawBoard "github.com/riston/slack-hangman/draw"
+	"github.com/slack-games/slack-hangman"
+	hngdatastore "github.com/slack-games/slack-hangman/datastore"
+	drawBoard "github.com/slack-games/slack-hangman/draw"
 )
 
 // GetGameImage returns the image by state

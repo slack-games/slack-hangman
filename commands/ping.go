@@ -1,6 +1,6 @@
 package commands
 
-import "github.com/riston/slack-client"
+import "github.com/slack-games/slack-client"
 
 // PingCommand ping back
 func PingCommand() slack.ResponseMessage {
