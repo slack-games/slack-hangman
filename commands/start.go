@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"os"
 
 	"github.com/jmoiron/sqlx"
 	"github.com/slack-games/slack-client"
@@ -13,6 +14,7 @@ import (
 
 func StartCommand(db *sqlx.DB, userID string) slack.ResponseMessage {
 	var attachment slack.Attachment
+	baseURL := os.Getenv("BASE_PATH")
 
 	message := "There's already existing a game, you have to finish it before starting a new"
 
@@ -32,9 +34,8 @@ func StartCommand(db *sqlx.DB, userID string) slack.ResponseMessage {
 			message = "Created a new clean game state"
 			attachment = slack.Attachment{
 				Title:    "Last game state",
-				Text:     "",
 				Fallback: "Text fallback if image fails",
-				ImageURL: fmt.Sprintf("https://gametestslack.localtunnel.me/game/hangman/image/%s", stateID),
+				ImageURL: fmt.Sprintf("%s/game/hangman/image/%s", baseURL, stateID),
 				Color:    "#764FA5",
 			}
 
@@ -44,9 +45,7 @@ func StartCommand(db *sqlx.DB, userID string) slack.ResponseMessage {
 
 			attachment = slack.Attachment{
 				Title:    "Could not get the last game state",
-				Text:     "",
 				Fallback: "Text fallback if image fails",
-				ImageURL: "",
 				Color:    "#764FA5",
 			}
 		}
@@ -64,7 +63,7 @@ func StartCommand(db *sqlx.DB, userID string) slack.ResponseMessage {
 			Title:    "New game state",
 			Text:     "",
 			Fallback: "Text fallback if image fails",
-			ImageURL: fmt.Sprintf("https://gametestslack.localtunnel.me/game/hangman/image/%s", stateID),
+			ImageURL: fmt.Sprintf("%s/game/hangman/image/%s", baseURL, stateID),
 			Color:    "#764FA5",
 		}
 	} else {
@@ -72,7 +71,7 @@ func StartCommand(db *sqlx.DB, userID string) slack.ResponseMessage {
 			Title:    "Last game state",
 			Text:     "",
 			Fallback: "Text fallback if image fails",
-			ImageURL: fmt.Sprintf("https://gametestslack.localtunnel.me/game/hangman/image/%s", state.StateID),
+			ImageURL: fmt.Sprintf("%s/game/hangman/image/%s", baseURL, state.StateID),
 			Color:    "#764FA5",
 		}
 	}

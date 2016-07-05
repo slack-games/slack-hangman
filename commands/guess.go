@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"os"
 	"time"
 
 	"github.com/jmoiron/sqlx"
@@ -13,14 +14,14 @@ import (
 )
 
 func GuessCommand(db *sqlx.DB, userID string, char rune) slack.ResponseMessage {
+	baseURL := os.Getenv("BASE_PATH")
 	state, err := hngdatastore.GetUserLastState(db, userID)
 
 	if err != nil {
 		// No state found
 		if err == sql.ErrNoRows {
 			return slack.ResponseMessage{
-				Text:        "You can not make any moves before the game has started `/game start`",
-				Attachments: []slack.Attachment{},
+				Text: "You can not make any moves before the game has started `/game start`",
 			}
 		}
 	}
@@ -29,8 +30,7 @@ func GuessCommand(db *sqlx.DB, userID string, char rune) slack.ResponseMessage {
 	if state.Mode == "GameOver" {
 		log.Println("Game is already over")
 		return slack.ResponseMessage{
-			Text:        "Current game is over, but you can always start a new game `/game start`",
-			Attachments: []slack.Attachment{},
+			Text: "Current game is over, but you can always start a new game `/game start`",
 		}
 	}
 
@@ -65,9 +65,7 @@ func GuessCommand(db *sqlx.DB, userID string, char rune) slack.ResponseMessage {
 		Attachments: []slack.Attachment{
 			slack.Attachment{
 				Title:    "The current game state",
-				Text:     "",
-				Fallback: "",
-				ImageURL: fmt.Sprintf("https://gametestslack.localtunnel.me/game/hangman/image/%s", stateID),
+				ImageURL: fmt.Sprintf("%s/game/hangman/image/%s", baseURL, stateID),
 				Color:    "#764FA5",
 			},
 		},
