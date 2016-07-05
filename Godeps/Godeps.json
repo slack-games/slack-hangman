@@ -1,0 +1,5 @@
+{
+	"ImportPath": "github.com/slack-games/slack-hangman",
+	"GoVersion": "go1.6.2",
+	"Deps": []
+}
