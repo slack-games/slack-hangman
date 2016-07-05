@@ -1,5 +1,57 @@
 {
 	"ImportPath": "github.com/slack-games/slack-hangman",
 	"GoVersion": "go1.6.2",
-	"Deps": []
+	"Packages": [
+		"./..."
+	],
+	"Deps": [
+		{
+			"ImportPath": "github.com/golang/freetype/raster",
+			"Comment": "release-131-g38b4c39",
+			"Rev": "38b4c392adc5eed94207994c4848fff99f4ac234"
+		},
+		{
+			"ImportPath": "github.com/golang/freetype/truetype",
+			"Comment": "release-131-g38b4c39",
+			"Rev": "38b4c392adc5eed94207994c4848fff99f4ac234"
+		},
+		{
+			"ImportPath": "github.com/jmoiron/sqlx",
+			"Comment": "sqlx-v1.1-60-gddb3dc8",
+			"Rev": "ddb3dc8bd6515cf1af155d322e01bd26a03bff18"
+		},
+		{
+			"ImportPath": "github.com/llgcode/draw2d",
+			"Comment": "v1-72-g3f01cfe",
+			"Rev": "3f01cfe277a813f87884f0ff9430d9998d058576"
+		},
+		{
+			"ImportPath": "github.com/slack-games/slack-client",
+			"Rev": "72f9e7e3870fe0405bcf0ad5221c8dd69bf3b103"
+		},
+		{
+			"ImportPath": "golang.org/x/image/draw",
+			"Rev": "8550bb53808b49e6f655a27cbb293b1f90c56a24"
+		},
+		{
+			"ImportPath": "golang.org/x/image/font",
+			"Rev": "8550bb53808b49e6f655a27cbb293b1f90c56a24"
+		},
+		{
+			"ImportPath": "golang.org/x/image/math/f64",
+			"Rev": "8550bb53808b49e6f655a27cbb293b1f90c56a24"
+		},
+		{
+			"ImportPath": "golang.org/x/image/math/fixed",
+			"Rev": "8550bb53808b49e6f655a27cbb293b1f90c56a24"
+		},
+		{
+			"ImportPath": "golang.org/x/net/context",
+			"Rev": "933937213561306ee71d265fb8a2913f20a55123"
+		},
+		{
+			"ImportPath": "golang.org/x/oauth2",
+			"Rev": "188fb45fbef6ffd967b3a8abcfe176fd473361df"
+		}
+	]
 }
